@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Form Validation</title>
+	<style>
+	body{
+		/* background-image: url("https://t3.ftcdn.net/jpg/05/55/54/30/360_F_555543028_8xKoqVr6bznIbLaeLgMxzXNu4mHXFjk7.jpg"); */
+		background-image: url("https://i.pinimg.com/736x/5d/34/cc/5d34cc93e0f701fbce2847dab293f2f2--wallpaper-gallery-blue-wallpapers.jpg");
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+			form {
+		
+				display: flex;
+				flex-direction: column;
+				/* align-items: flex-start; */
+				padding: 20px;
+				border: 3px solid gold;
+				border-radius: 5px;
+				max-width: 400px;
+				margin: 0 auto;
+				font-size: 20px;
+				margin-top: 60px;
+				/* background-color: darkblue; */
+			
+			}
+			label {
+			margin-bottom: 5px;
+			
+		}
+		h1{
+	color: gold;
+justify-content: center;
+margin-top: 50px;
+font-size: 50px;
+text-shadow: gold;
+text-shadow: 5px 5px 10px blue;
+
+		}
+		
+		input {
+			margin-bottom: 10px;
+			padding: 5px;
+			border-radius: 3px;
+			border: 1px solid ;
+			font-size: 16px;
+			width: 100%;
+			box-sizing: border-box;
+			background-color: rgb(255, 255, 159);
+		}
+		
+		.error {
+			color: red;
+			font-size: 4px;
+			margin-top: 5px;
+		}
+		
+		input[type="submit"] {
+			background-color: #4CAF50;
+			color: #fff;
+			border: none;
+			padding: 10px 20px;
+			border-radius: 3px;
+			font-size: 16px;
+			cursor: pointer;
+			margin-top: 10px;
+			align-self: flex-end;
+		}
+		
+		input[type="submit"]:hover {
+			background-color: #3e8e41;
+		}
+		/* input[type="checkbox"]{
+			margin-left: 0px
+		} */
+		
+		.container{
+			color: gold;
+			/* font-size: 25px; */
+			
+		}
+		
+	</style>
+   
+</head>
+<body>
+	<center><h1><b>Registeration Form</b></h1></center>
+	<div class="container">
+	<form name="myForm" onsubmit="return validateForm()">
+		<label>First Name:</label>
+		<input type="text" name="firstName">
+		<span id="nameError"></span><br>
+		
+		<label>Last Name:</label>
+		<input type="text" name="lastName"><br>
+		<span id="nameError"></span>
+		
+		<label>Phone Number:</label>
+		<input type="text" name="phone">
+		<span id="phoneError"></span><br>
+		
+		<label>Email:</label>
+		<input type="text" name="email">
+		<span id="emailError"></span><br>
+		
+		<label>Password:</label>
+		<input type="password" name="password">
+		<span id="passwordError"></span><br>
+		
+		<input type="checkbox" name="terms">I agree to the given Terms and Conditions 
+		<span id="termsError"></span><br>
+		
+
+      
+		<input type="submit" value="Submit">
+	</form></div>
+</body>
+<script>
+	function validateForm() {
+		// Get input values
+		var firstName = document.forms["myForm"]["firstName"].value;
+		var lastName = document.forms["myForm"]["lastName"].value;
+		var phone = document.forms["myForm"]["phone"].value;
+		var email = document.forms["myForm"]["email"].value;
+		var password = document.forms["myForm"]["password"].value;
+		var terms = document.forms["myForm"]["terms"].checked;
+		
+		// Check if first and last name are not empty
+		if (firstName == "" || lastName == "") {
+			document.getElementById("nameError").innerHTML = "Name cannot be empty";
+			return false;
+		}
+		
+		// Check if phone number is valid
+		if (!phone.match(/^\d{10}$/)) {
+			document.getElementById("phoneError").innerHTML = "Please enter a valid phone number";
+			return false;
+		}
+		
+		// Check if email is valid
+		if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+			document.getElementById("emailError").innerHTML = "Please enter a valid email address";
+			return false;
+		}
+		
+		// Check if password is valid
+		if (!password.match(/^(?=.*\d)(?=.*[A-Z])[0-9a-zA-Z]{8,}$/)) {
+			document.getElementById("passwordError").innerHTML = "Password must be at least 8 characters long and contain at least one numeric value and one uppercase letter";
+			return false;
+		}
+		
+		// Check if terms checkbox is checked
+		if (!terms) {
+			document.getElementById("termsError").innerHTML = "You must agree to the terms and conditions";
+			return false;
+		}
+		
+		// Log form values to console and show success message
+		console.log("First Name: " + firstName);
+		console.log("Last Name: " + lastName);
+		console.log("Phone: " + phone);
+		console.log("Email: " + email);
+		console.log("Password: " + password);
+		alert("Form submitted successfully");
+		return true;
+	}
+</script>
+</html>
